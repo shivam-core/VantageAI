@@ -1,0 +1,43 @@
+{
+    "intents": {
+        "coding": [
+            "Request modular, clean code with comments explaining complex logic.",
+            "Ask for error handling (try/except blocks) and edge case management.",
+            "Specify preferred libraries (e.g., 'Use pandas 2.0+ features').",
+            "Request a 'usage example' or 'main' execution block."
+        ],
+        "creative": [
+            "Define a specific persona (e.g., 'Award-winning Copywriter').",
+            "Specify tone (e.g., 'Witty', 'Professional', 'Empathic').",
+            "Ask for 'Show, Don't Tell' examples.",
+            "Request multiple variations to choose from."
+        ],
+        "reasoning": [
+            "Ask the model to 'Think Step-by-Step' (Chain of Thought).",
+            "Request a 'Pros and Cons' analysis before the final answer.",
+            "Ask for citations or sources if applicable.",
+            "Challenge the model to look for potential biases."
+        ]
+    },
+    "models": {
+        "claude": [
+            "Use XML tags (e.g., <instructions>, <context>) to structure the prompt.",
+            "Ask Claude to use a <thinking> block before generating the final answer.",
+            "Avoid negative constraints ('Don't do X'); use positive instructions ('Do Y instead')."
+        ],
+        "gemini": [
+            "Place large context documents/data at the VERY BEGINNING of the prompt.",
+            "Use clear Markdown headers (###) to separate instructions from data.",
+            "Explicitly ask for multimodal awareness if images/files are involved."
+        ],
+        "chatgpt": [
+            "Use standard Markdown (#, ##) for hierarchy.",
+            "Clearly separate 'Role', 'Context', and 'Task' sections.",
+            "For complex tasks, explicitly ask for a 'Step-by-Step' plan first."
+        ],
+        "generic": [
+            "Use the CO-STAR framework: Context, Objective, Style, Tone, Audience, Response.",
+            "Be specific about output format (JSON, Markdown, Bullet points)."
+        ]
+    }
+}

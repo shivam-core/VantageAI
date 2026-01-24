@@ -1,0 +1,24 @@
+{
+    "coding": [
+        {
+            "bad": "fix my python code it errors",
+            "good": "Act as a Senior Python Developer. I have a script that is throwing a `ValueError` during data processing. Review the attached code snippet, identify the root cause, and provide a corrected version. Explain your fix using comments within the code."
+        },
+        {
+            "bad": "write a snake game",
+            "good": "Write a complete Python script for the classic Snake game using the `pygame` library. The code should be object-oriented, include a main execution loop, and handle user input for movement. Add comments explaining the game logic."
+        }
+    ],
+    "creative": [
+        {
+            "bad": "write a blog about coffee",
+            "good": "Act as a Lifestyle Blogger with a cozy, inviting tone. Write a 500-word blog post titled 'The Art of Morning Coffee'. Use sensory details to describe the brewing process. Target audience: busy professionals looking for a morning ritual."
+        }
+    ],
+    "reasoning": [
+        {
+            "bad": "is nuclear power good",
+            "good": "Act as an Energy Policy Analyst. Conduct a neutral, objective analysis of nuclear power. Structure your response with a 'Pros' section (focusing on zero emissions and baseload reliability) and a 'Cons' section (focusing on waste disposal and cost). Conclude with a summary of the current global trend."
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "applications": {
+        "gemini": "Use clear headers, bullet points, and multimodal context structure. Place data/context at the start.",
+        "chatgpt": "Use Markdown hierarchy (#, ##). Define a clear Role and Task.",
+        "claude": "Use XML tags (<context>, <task>) to separate sections."
+    },
+    "models": {
+        "gemini-1.5-flash": "Optimize for Speed: Be concise, direct, and use strict constraints.",
+        "gemini-1.5-pro": "Optimize for Context: Encourage utilizing the large context window. Be descriptive.",
+        "gemini-2.0-flash": "Optimize for Real-Time Logic: Use short, punchy instructions. Focus on multimodal inputs.",
+        "gemini-2.0-pro": "Optimize for Complex Reasoning: Use Chain-of-Thought (CoT) triggers. Ask for step-by-step analysis.",
+        "gemini-3.0": "Optimize for Future-Gen Capabilities: Assume high reasoning capability. Use abstract constraints and demand nuance.",
+        "standard": "Use a helpful Expert Persona. Be clear and structured."
+    },
+    "use_cases": {
+        "coding": "Output a Natural Language explanation of the logic, followed by the code block. DO NOT output raw JSON data structures.",
+        "study": "Use the Socratic Method. Guide the user with questions. Format as a clean study guide.",
+        "creative": "Focus on Tone, Style, and Audience. Use 'Show, Don't Tell'. Ask for multiple variations.",
+        "reasoning": "Require step-by-step analysis. Ask for Pros and Cons list before conclusion.",
+        "general": "Use the CO-STAR framework (Context, Objective, Style, Tone, Audience, Response) in readable Markdown."
+    }
+}

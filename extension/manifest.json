@@ -1,0 +1,64 @@
+{
+    "manifest_version": 3,
+    "name": "VantageAI",
+    "version": "1.0.0",
+    "description": "The AI Prompt Engineer for Gemini - Optimize your prompts before sending",
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage"
+    ],
+    "host_permissions": [
+        "http://localhost:8000/*",
+        "https://*/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "styles.css"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "styles.css",
+                "icons/logo.png"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "commands": {
+        "execute_vantage": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+X",
+                "mac": "MacCtrl+Shift+X"
+            },
+            "description": "Analyze the current prompt with VantageAI"
+        }
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icons/icon16.png",
+            "48": "icons/icon48.png",
+            "128": "icons/icon128.png"
+        }
+    },
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    }
+}

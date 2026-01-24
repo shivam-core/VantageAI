@@ -1,0 +1,14 @@
+{
+    "criteria": [
+        "Clarity: Is the objective unambiguous?",
+        "Persona: Does it define a specific role (e.g., 'Senior Engineer')?",
+        "Context: Does it provide necessary background info?",
+        "Constraints: Does it specify output format, length, or exclusions?",
+        "Model-Fit: Does it use techniques specific to the target AI (e.g., XML for Claude)?"
+    ],
+    "scoring_guide": {
+        "1-4": "Basic. Vague intent, no persona, no constraints. (e.g., 'write code')",
+        "5-7": "Intermediate. Has clear intent and maybe a role, but lacks specific constraints or formatting.",
+        "8-10": "Expert. Uses a Framework (CO-STAR/ReAct), defined persona, strict output constraints, and model-specific syntax."
+    }
+}
