@@ -90,9 +90,9 @@ async def analyze_prompt(request: AnalyzeRequest):
 
         result_text = response.choices[0].message.content
         
-        # Sanitize JSON - remove control characters that break parsing
+        # Sanitize JSON - remove control characters but preserve newlines and tabs
         import re
-        result_text = re.sub(r'[\x00-\x1f\x7f-\x9f]', '', result_text)
+        result_text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]', '', result_text)
         
         result = json.loads(result_text)
         print(f"✅ Success! Framework: {result.get('diff_summary the ', 'Unknown')} | Score: {result.get('score', '?')}/10")

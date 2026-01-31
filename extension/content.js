@@ -96,6 +96,54 @@
         btn.style.zIndex = '2147483646';
     }
 
+    function positionHUD() {
+        const hud = document.getElementById('vantage-hud-overlay');
+        const btn = document.getElementById('vantage-floating-btn');
+        const input = lastActiveInput || getActiveInput();
+        if (!hud) return;
+
+        const hudWidth = 320;
+        const hudHeight = hud.offsetHeight || 400;
+
+        // Position near the floating button if it exists
+        if (btn) {
+            const btnRect = btn.getBoundingClientRect();
+            // Position above/below the button, right-aligned
+            let top = btnRect.top - hudHeight - 10;
+            let right = window.innerWidth - btnRect.right;
+
+            // If not enough space above, position below
+            if (top < 20) {
+                top = btnRect.bottom + 10;
+            }
+
+            // Keep within bounds
+            if (top + hudHeight > window.innerHeight - 20) {
+                top = window.innerHeight - hudHeight - 20;
+            }
+
+            hud.style.position = 'fixed';
+            hud.style.top = top + 'px';
+            hud.style.right = right + 'px';
+            hud.style.left = 'auto';
+        } else if (input) {
+            // Fallback: position near input on the right
+            const rect = input.getBoundingClientRect();
+            let right = 20;
+            let top = rect.top;
+
+            if (top + hudHeight > window.innerHeight - 20) {
+                top = window.innerHeight - hudHeight - 20;
+            }
+            if (top < 20) top = 20;
+
+            hud.style.position = 'fixed';
+            hud.style.top = top + 'px';
+            hud.style.right = right + 'px';
+            hud.style.left = 'auto';
+        }
+    }
+
     // ═══════════════════════════════════════════════════════════════
     // 3. OBSERVER
     // ═══════════════════════════════════════════════════════════════
@@ -132,8 +180,8 @@
                 <div class="vantage-header">
                     <div class="vantage-logo">
                         <img src="${logoUrl}" alt="V" class="vantage-logo-img">
-                        <span>VantageAI</span>
-                        <span class="vantage-badge">PRO</span>
+                        <span class="vantage-logo-text">VantageAI</span>
+                        <span class="vantage-badge">BETA</span>
                     </div>
                     <button id="vantage-close-btn" class="vantage-close">×</button>
                 </div>
@@ -158,21 +206,26 @@
                     </select>
                 </div>
 
-                <div class="vantage-body">
+                <div class="vantage-action-row">
                     <button id="vantage-run-btn" class="vantage-action-btn">OPTIMIZE PROMPT</button>
-                    <div class="vantage-diagnosis">
-                        <div class="vantage-section-label">Status</div>
-                        <div id="vantage-diagnosis-text">Ready to optimize...</div>
+                </div>
+
+                <div class="vantage-body">
+                    <div>
+                        <div class="vantage-section-label">STATUS</div>
+                        <div class="vantage-diagnosis">
+                            <div id="vantage-diagnosis-text" class="vantage-diagnosis-text">Ready to optimize...</div>
+                        </div>
                     </div>
                     <div class="vantage-result-container">
-                        <div class="vantage-section-label">Optimized Prompt</div>
+                        <div class="vantage-section-label">OPTIMIZED PROMPT</div>
                         <div id="vantage-result-text" class="vantage-result-box"></div>
                     </div>
                 </div>
 
                 <div class="vantage-footer">
                     <div class="vantage-score-pill" id="vantage-score">--/10</div>
-                    <div style="flex:1"></div>
+                    <div class="vantage-spacer"></div>
                     <button class="vantage-btn vantage-btn-secondary" id="vantage-dismiss-btn">Dismiss</button>
                     <button class="vantage-btn vantage-btn-primary" id="vantage-apply-btn">Apply Fix</button>
                 </div>
@@ -191,6 +244,9 @@
         const wrapper = document.createElement('div');
         wrapper.innerHTML = hudHTML;
         document.body.appendChild(wrapper.firstElementChild);
+
+        // Position HUD near the chat input (Grammarly-style)
+        positionHUD();
 
         document.getElementById('vantage-close-btn').onclick = removeHUD;
         document.getElementById('vantage-dismiss-btn').onclick = removeHUD;
