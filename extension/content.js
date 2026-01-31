@@ -146,10 +146,7 @@
                     </select>
 
                     <select id="sel-model" class="vantage-select">
-                        <option value="gemini-2.0-flash" selected>2.0 Flash</option>
-                        <option value="gemini-2.0-pro">2.0 Pro</option>
-                        <option value="gemini-3.0">3.0 Preview</option>
-                        <option value="gemini-1.5-pro">1.5 Pro</option>
+                        <!-- Models populated dynamically -->
                     </select>
 
                     <select id="sel-usecase" class="vantage-select">
@@ -199,6 +196,67 @@
         document.getElementById('vantage-dismiss-btn').onclick = removeHUD;
         document.getElementById('vantage-apply-btn').onclick = applyFix;
         document.getElementById('vantage-run-btn').onclick = runOptimization;
+
+        // Dynamic model selection based on AI app (Updated January 2026)
+        const modelsByApp = {
+            gemini: [
+                // Flagship & Frontier
+                { value: 'gemini-3-pro', label: 'Gemini 3 Pro (Preview)' },
+                { value: 'gemini-3-flash', label: 'Gemini 3 Flash' },
+                // Stable & Efficient
+                { value: 'gemini-2.5-pro', label: 'Gemini 2.5 Pro' },
+                { value: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash' },
+                { value: 'gemini-2.5-flash-lite', label: 'Gemini 2.5 Flash-Lite' },
+                // Specialized
+                { value: 'gemini-2.5-flash-audio', label: '2.5 Flash Native Audio' }
+            ],
+            chatgpt: [
+                // Flagship (GPT-5 Series)
+                { value: 'gpt-5.2', label: 'GPT-5.2' },
+                { value: 'gpt-5.2-pro', label: 'GPT-5.2 Pro' },
+                { value: 'gpt-5-mini', label: 'GPT-5 Mini' },
+                { value: 'gpt-5-nano', label: 'GPT-5 Nano' },
+                // Reasoning & Research
+                { value: 'o3-deep-research', label: 'o3 Deep Research' },
+                { value: 'o3-pro', label: 'o3 Pro' },
+                // Legacy (Retiring Feb 2026)
+                { value: 'gpt-4o', label: 'GPT-4o (Legacy)' },
+                { value: 'gpt-4.1', label: 'GPT-4.1 (Legacy)' }
+            ],
+            claude: [
+                // Flagship (Opus Line)
+                { value: 'claude-opus-4.5', label: 'Claude Opus 4.5' },
+                { value: 'claude-opus-4.1', label: 'Claude Opus 4.1' },
+                // Balanced (Sonnet Line)
+                { value: 'claude-sonnet-4.5', label: 'Claude Sonnet 4.5' },
+                { value: 'claude-sonnet-4', label: 'Claude Sonnet 4' },
+                // Speed (Haiku Line)
+                { value: 'claude-haiku-4.5', label: 'Claude Haiku 4.5' },
+                // Legacy
+                { value: 'claude-3.5-sonnet', label: 'Claude 3.5 Sonnet (Legacy)' }
+            ]
+        };
+
+        function populateModels(app) {
+            const modelSelect = document.getElementById('sel-model');
+            modelSelect.innerHTML = '';
+            const models = modelsByApp[app] || modelsByApp.gemini;
+            models.forEach((model, index) => {
+                const option = document.createElement('option');
+                option.value = model.value;
+                option.textContent = model.label;
+                if (index === 0) option.selected = true;
+                modelSelect.appendChild(option);
+            });
+        }
+
+        // Initialize models for default app (Gemini)
+        populateModels('gemini');
+
+        // Update models when app changes
+        document.getElementById('sel-app').addEventListener('change', (e) => {
+            populateModels(e.target.value);
+        });
     }
 
     // ═══════════════════════════════════════════════════════════════
