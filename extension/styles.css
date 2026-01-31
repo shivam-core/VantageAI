@@ -1,110 +1,68 @@
 /* ═══════════════════════════════════════════════════════════════
-   VANTAGE AI - NATIVE INTEGRATION THEME
-   With Grammarly-Style Floating Button
+   VANTAGE DESIGN SYSTEM (OpenAI Industrial)
+   Solid, Opaque, Utilitarian, Trustworthy
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-    --bg-hud: #FFFFFF;
-    --bg-panel: #F3F4F6;
-    --bg-hover: #E5E7EB;
-    --border-subtle: #E5E7EB;
-    --border-focus: #000000;
-    --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', 'SF Mono', Monaco, monospace;
-    --text-primary: #000000;
-    --text-secondary: #4B5563;
-    --text-tertiary: #9CA3AF;
-    --accent-success: #10B981;
-    --accent-warning: #F59E0B;
-    --accent-error: #EF4444;
-    --vantage-purple: #8B5CF6;
+    /* Core Surface Colors (Solid, No Blur) */
+    --bg-hud: #202123;
+    /* ChatGPT Dark Background */
+    --bg-panel: #343541;
+    /* Slightly lighter panel */
+    --bg-input: #40414F;
+    /* Input fields */
+
+    /* Borders */
+    --border-subtle: #565869;
+    /* OpenAI Border Gray */
+    --border-focus: #19C37D;
+    /* ChatGPT Green */
+
+    /* Typography */
+    --font-stack: 'Söhne', 'Segoe UI', Helvetica, Arial, sans-serif;
+    --text-primary: #ECECF1;
+    --text-secondary: #C5C5D2;
+    --text-tertiary: #8E8EA0;
+
+    /* Semantic Colors */
+    --accent-success: #19C37D;
+    /* Brand Green */
+    --accent-warning: #E2B203;
+    /* Yellow for Diagnosis */
+    --accent-error: #EF4146;
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   THE FLOATING V BUTTON (GRAMMARLY-STYLE)
-   ═══════════════════════════════════════════════════════════════ */
-
-#vantage-floating-btn {
-    position: fixed;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #E8E8E8 0%, #C0C0C0 50%, #A8A8A8 100%);
-    color: #1a1a1a;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    cursor: pointer;
-    z-index: 2147483646;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-family: var(--font-stack);
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.2),
-        0 0 0 0 rgba(192, 192, 192, 0.4),
-        inset 0 1px 2px rgba(255, 255, 255, 0.5);
-    transition: all 0.2s ease;
-    animation: vantage-pulse 2s infinite;
-}
-
-@keyframes vantage-pulse {
-
-    0%,
-    100% {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(192, 192, 192, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.5);
-    }
-
-    50% {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 4px rgba(192, 192, 192, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.5);
-    }
-}
-
-#vantage-floating-btn:hover {
-    transform: scale(1.15);
-    background: linear-gradient(135deg, #F5F5F5 0%, #D4D4D4 50%, #BEBEBE 100%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.8);
-    animation: none;
-}
-
-#vantage-floating-btn:active {
-    transform: scale(0.95);
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   MAIN CONTAINER
+   MAIN CONTAINER (Rigid Fix)
    ═══════════════════════════════════════════════════════════════ */
 
 #vantage-hud-overlay {
     position: fixed;
-    bottom: 100px;
-    right: 40px;
-    z-index: 2147483647;
+    top: 20px;
+    right: 20px;
+    z-index: 999999;
     font-family: var(--font-stack);
-    -webkit-font-smoothing: antialiased;
 }
 
 .vantage-card {
-    width: 440px;
-    max-height: 75vh;
-    background: var(--bg-hud);
+    width: 450px;
+    background-color: var(--bg-hud);
     border: 1px solid var(--border-subtle);
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    animation: slideUp 0.2s ease-out;
+    /* Animation */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeSnap 0.2s ease-out forwards;
 }
 
-@keyframes slideUp {
-    from {
-        transform: translateY(10px);
-        opacity: 0;
-    }
-
+@keyframes fadeSnap {
     to {
-        transform: translateY(0);
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -113,181 +71,149 @@
    ═══════════════════════════════════════════════════════════════ */
 
 .vantage-header {
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border-subtle);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--bg-hud);
-}
-
-.vantage-logo {
-    font-weight: 800;
-    color: var(--text-primary);
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.vantage-logo-img {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-    border-radius: 4px;
-}
-
-.vantage-badge {
-    font-size: 9px;
-    font-weight: 600;
-    color: var(--vantage-purple);
-    background: rgba(139, 92, 246, 0.1);
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-left: 4px;
-}
-
-.vantage-close {
-    background: none;
-    border: none;
-    color: var(--text-tertiary);
-    cursor: pointer;
-    font-size: 20px;
-    padding: 4px 8px;
-    border-radius: 4px;
-}
-
-.vantage-close:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   CONTROLS ROW
-   ═══════════════════════════════════════════════════════════════ */
-
-.vantage-controls-row {
-    display: flex;
-    gap: 8px;
-    padding: 10px 16px;
-    background: var(--bg-panel);
+    padding: 12px 16px;
+    background-color: var(--bg-panel);
     border-bottom: 1px solid var(--border-subtle);
 }
 
-.vantage-select {
-    flex: 1;
-    background: var(--bg-hud);
+.vantage-logo {
+    font-weight: 700;
     color: var(--text-primary);
-    border: 1px solid var(--border-subtle);
-    border-radius: 6px;
-    padding: 8px;
-    font-size: 12px;
-    font-family: var(--font-stack);
-    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.vantage-select:focus {
-    outline: none;
-    border-color: var(--vantage-purple);
+.vantage-logo-icon {
+    font-size: 16px;
+}
+
+.vantage-score-pill {
+    background: var(--bg-input);
+    color: var(--text-primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.vantage-score-pill.score-high {
+    background: rgba(25, 195, 125, 0.2);
+    color: var(--accent-success);
+}
+
+.vantage-score-pill.score-medium {
+    background: rgba(226, 178, 3, 0.2);
+    color: var(--accent-warning);
+}
+
+.vantage-score-pill.score-low {
+    background: rgba(239, 65, 70, 0.2);
+    color: var(--accent-error);
+}
+
+.vantage-close {
+    background: transparent;
+    border: none;
+    color: var(--text-tertiary);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+    transition: color 0.15s;
+}
+
+.vantage-close:hover {
+    color: var(--text-primary);
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   BODY
+   BODY LAYOUT (Fixing the dismantling)
    ═══════════════════════════════════════════════════════════════ */
 
 .vantage-body {
     padding: 16px;
-    overflow-y: auto;
-    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    background: var(--bg-hud);
+    gap: 16px;
+    /* Strict spacing between boxes */
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ACTION BUTTON
-   ═══════════════════════════════════════════════════════════════ */
+/* Health Bar */
+.vantage-health-bar {
+    height: 4px;
+    background: var(--bg-input);
+    border-radius: 2px;
+    overflow: hidden;
+}
 
-.vantage-action-btn {
-    width: 100%;
-    background: #000000;
-    color: #FFFFFF;
-    border: none;
-    padding: 12px 16px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    margin-bottom: 8px;
-    font-family: var(--font-stack);
+.vantage-health-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.vantage-health-fill.fill-high {
+    background: var(--accent-success);
+}
+
+.vantage-health-fill.fill-medium {
+    background: var(--accent-warning);
+}
+
+.vantage-health-fill.fill-low {
+    background: var(--accent-error);
+}
+
+/* Section Labels */
+.vantage-section-label {
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.vantage-action-btn:hover {
-    transform: translateY(-1px);
-    opacity: 0.9;
-}
-
-.vantage-action-btn:active {
-    transform: translateY(1px);
-}
-
-.vantage-action-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background: #333333;
-    transform: none;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   LABELS & BOXES
-   ═══════════════════════════════════════════════════════════════ */
-
-.vantage-label {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    color: var(--text-tertiary);
     margin-bottom: 6px;
-    display: block;
+    font-weight: 600;
 }
 
+/* DIAGNOSIS BOX */
 .vantage-diagnosis {
-    background: #FFFBEB;
+    background-color: rgba(226, 178, 3, 0.1);
+    /* Low opacity yellow */
     border-left: 3px solid var(--accent-warning);
+    color: var(--text-secondary);
     padding: 12px;
+    font-size: 13px;
+    line-height: 1.5;
     border-radius: 4px;
 }
 
-#vantage-diagnosis-text {
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--text-secondary);
-}
-
-.vantage-result-container {
-    display: flex;
-    flex-direction: column;
-}
-
+/* RESULT BOX */
 .vantage-result-box {
-    background: var(--bg-panel);
+    background-color: var(--bg-input);
     border: 1px solid var(--border-subtle);
+    border-radius: 6px;
     padding: 14px;
-    border-radius: 8px;
     color: var(--text-primary);
-    font-family: var(--font-mono);
-    font-size: 12px;
+    font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    font-size: 13px;
     line-height: 1.6;
     min-height: 80px;
-    max-height: 200px;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    word-break: break-word;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HIGHLIGHTS
+   ═══════════════════════════════════════════════════════════════ */
+
+.vantage-highlight {
+    color: var(--accent-success);
+    background-color: rgba(25, 195, 125, 0.1);
+    border-bottom: 1px solid var(--accent-success);
+    font-weight: 600;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -295,64 +221,73 @@
    ═══════════════════════════════════════════════════════════════ */
 
 .vantage-footer {
-    padding: 14px 16px;
-    background: var(--bg-hud);
+    padding: 12px 16px;
+    background-color: var(--bg-hud);
     border-top: 1px solid var(--border-subtle);
     display: flex;
-    align-items: center;
+    justify-content: flex-end;
     gap: 10px;
 }
 
-.vantage-score-pill {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text-primary);
-    background: var(--bg-panel);
-    padding: 6px 12px;
-    border-radius: 20px;
-}
-
-.vantage-score-pill.score-low {
-    background: #FEE2E2;
-    color: var(--accent-error);
-}
-
-.vantage-score-pill.score-medium {
-    background: #FEF3C7;
-    color: #D97706;
-}
-
-.vantage-score-pill.score-high {
-    background: #D1FAE5;
-    color: #059669;
-}
-
 .vantage-btn {
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 8px 14px;
+    border-radius: 4px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
-    border: none;
-    font-family: var(--font-stack);
-    transition: all 0.1s ease;
+    border: 1px solid transparent;
+    transition: background 0.15s;
 }
 
 .vantage-btn-secondary {
     background: transparent;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
+    border-color: var(--border-subtle);
 }
 
 .vantage-btn-secondary:hover {
-    color: var(--text-primary);
-    background: var(--bg-hover);
+    background: var(--bg-panel);
 }
 
 .vantage-btn-primary {
-    background: var(--accent-success);
-    color: #000;
+    background-color: var(--accent-success);
+    color: #FFFFFF;
 }
 
 .vantage-btn-primary:hover {
-    opacity: 0.9;
+    background-color: #1a8f5e;
+    /* Darker green */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPEWRITER CURSOR
+   ═══════════════════════════════════════════════════════════════ */
+
+.vantage-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: var(--accent-success);
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ERROR STATE
+   ═══════════════════════════════════════════════════════════════ */
+
+.vantage-error {
+    background: rgba(239, 65, 70, 0.1);
+    border-left: 3px solid var(--accent-error);
+    color: var(--accent-error);
+    padding: 12px;
+    font-size: 13px;
+    border-radius: 4px;
 }

@@ -164,11 +164,11 @@
                 <div class="vantage-body">
                     <button id="vantage-run-btn" class="vantage-action-btn">OPTIMIZE PROMPT</button>
                     <div class="vantage-diagnosis">
-                        <span class="vantage-label">STATUS</span>
+                        <div class="vantage-section-label">Status</div>
                         <div id="vantage-diagnosis-text">Ready to optimize...</div>
                     </div>
                     <div class="vantage-result-container">
-                        <span class="vantage-label">OPTIMIZED PROMPT</span>
+                        <div class="vantage-section-label">Optimized Prompt</div>
                         <div id="vantage-result-text" class="vantage-result-box"></div>
                     </div>
                 </div>
@@ -229,7 +229,7 @@
         runBtn.innerText = "PROCESSING...";
 
         try {
-            const response = await fetch('http://localhost:8000/api/analyze', {
+            const response = await fetch('https://vantageai.onrender.com/api/analyze', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
